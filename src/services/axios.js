@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 // Criação de instância do Axios
 const api = axios.create({
-  baseURL: "http://localhost:3004",
+  baseURL: "https://apiouvidoria.logicmasters.com.br",
   withCredentials: true,
 });
 
