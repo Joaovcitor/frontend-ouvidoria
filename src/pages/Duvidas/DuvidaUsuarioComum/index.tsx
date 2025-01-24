@@ -2,20 +2,25 @@ import React, { useEffect, useState } from "react";
 import { Organizador, Div } from "./styled";
 import axios from "../../../services/axios";
 import { format } from "date-fns";
-
 import { toast } from "react-toastify";
 
-export default function ReclamacoesUsuarioComum() {
-  const [agendas, setReclamacoes] = useState([]);
+import { Duvidas } from "../../../types/api";
+
+export default function DuvidasUsuarioComum() {
+  const [agendas, setReclamacoes] = useState<Duvidas[]>([]);
 
   useEffect(() => {
     async function getData() {
       try {
-        const response = await axios.get("/reclamacoes/minhas-reclamacoes");
+        const response = await axios.get<{
+          duvidas: Duvidas[];
+        }>("/duvidas/minhas-duvidas");
+
         console.log(response.data);
-        setReclamacoes(response.data.reclamacoes);
+        setReclamacoes(response.data.duvidas);
       } catch (e) {
         console.log(e);
+        toast.error("Erro ao buscar as reclamações");
       }
     }
     getData();
@@ -32,8 +37,9 @@ export default function ReclamacoesUsuarioComum() {
   const agendasAceitas = agendas.filter(
     (agenda) => agenda.status === "resolvida"
   );
+
   return (
-    <Div>
+    <div>
       <h2>Reclamações pendentes {reclamacoesPendentes.length}</h2>
       <Organizador>
         {reclamacoesPendentes.length > 0 ? (
@@ -41,7 +47,7 @@ export default function ReclamacoesUsuarioComum() {
             <nav key={demanda.id}>
               <p>
                 Dia que foi solicitada:{" "}
-                {format(demanda.createdAt, "dd/MM/yyyy")}
+                {format(new Date(demanda.createdAt), "dd/MM/yyyy")}
               </p>
               <h4>Descrição:</h4>
               <p>{demanda.descricao}</p>
@@ -52,14 +58,15 @@ export default function ReclamacoesUsuarioComum() {
           <p>Nenhuma Reclamação pendente.</p>
         )}
       </Organizador>
-      <h2>Reclamações Em analise {reclamacoesEmAnalise.length}</h2>
+
+      <h2>Reclamações Em análise {reclamacoesEmAnalise.length}</h2>
       <Organizador>
         {reclamacoesEmAnalise.length > 0 ? (
           reclamacoesEmAnalise.map((reclamacao) => (
             <nav key={reclamacao.id}>
               <p>
                 Dia que foi solicitada:{" "}
-                {format(reclamacao.createdAt, "dd/MM/yyyy")}
+                {format(new Date(reclamacao.createdAt), "dd/MM/yyyy")}
               </p>
               <p>Descrição:</p>
               <p>{reclamacao.descricao}</p>
@@ -70,6 +77,7 @@ export default function ReclamacoesUsuarioComum() {
           <p>Nenhuma Reclamação pendente.</p>
         )}
       </Organizador>
+
       <h2>Agendas aceitas {agendasAceitas.length}</h2>
       <Organizador>
         {agendasAceitas.length > 0 ? (
@@ -77,7 +85,7 @@ export default function ReclamacoesUsuarioComum() {
             <nav key={demanda.id}>
               <p>
                 Dia que foi solicitada:{" "}
-                {format(demanda.createdAt, "dd/MM/yyyy")}
+                {format(new Date(demanda.createdAt), "dd/MM/yyyy")}
               </p>
               <p>Descrição:</p>
               <p>{demanda.descricao}</p>
@@ -88,6 +96,6 @@ export default function ReclamacoesUsuarioComum() {
           <p>Nenhuma Reclamação pendente.</p>
         )}
       </Organizador>
-    </Div>
+    </div>
   );
 }

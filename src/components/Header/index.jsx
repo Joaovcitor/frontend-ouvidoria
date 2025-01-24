@@ -43,7 +43,7 @@ export default function Header() {
         </>
       ) : (
         <>
-          <Link>Sobre o Serviço</Link>
+          <Link to={"/sobre"}>Sobre o Serviço</Link>
           <Link to="/login">Entrar</Link>
           <Link to="/cadastrar">Criar conta</Link>
         </>

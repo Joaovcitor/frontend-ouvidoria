@@ -4,14 +4,14 @@ import axios from "../../../services/axios";
 import { format } from "date-fns";
 import { FcSupport } from "react-icons/fc";
 
-export default function ReclamacoesSecretaria() {
-  const [agendas, setReclamacoes] = useState([]);
+export default function DuvidasSecretaria() {
+  const [reclamacoes, setReclamacoes] = useState([]);
   const [reclamacaoSemSecretaria, setReclamacoesSemSecretaria] = useState([]);
 
   useEffect(() => {
     async function getData() {
       try {
-        const response = await axios.get("/reclamacoes/reclamacoes-secretaria");
+        const response = await axios.get("/duvidas/duvidas-secretaria");
         console.log(response.data);
         setReclamacoes(response.data.reclamacoes);
       } catch (e) {
@@ -36,15 +36,15 @@ export default function ReclamacoesSecretaria() {
     getData();
   }, []);
 
-  const reclamacoesPendentes = agendas.filter(
+  const reclamacoesPendentes = reclamacoes.filter(
     (agenda) => agenda.status === "pendente"
   );
 
-  const reclamacoesEmAnalise = agendas.filter(
+  const reclamacoesEmAnalise = reclamacoes.filter(
     (agenda) => agenda.status === "em analise"
   );
 
-  const agendasAceitas = agendas.filter(
+  const reclamacoesAceitas = reclamacoes.filter(
     (agenda) => agenda.status === "resolvida"
   );
   return (
@@ -67,7 +67,7 @@ export default function ReclamacoesSecretaria() {
             </nav>
           ))
         ) : (
-          <p>Nenhuma Reclamação pendente.</p>
+          <p>Nenhuma Dúvida pendente.</p>
         )}
       </Organizador>
       <h2>Reclamações pendentes {reclamacoesPendentes.length}</h2>
@@ -88,7 +88,7 @@ export default function ReclamacoesSecretaria() {
             </nav>
           ))
         ) : (
-          <p>Nenhuma Reclamação pendente.</p>
+          <p>Nenhuma Dúvida pendente.</p>
         )}
       </Organizador>
       <h2>Reclamações Em analise {reclamacoesEmAnalise.length}</h2>
@@ -109,13 +109,13 @@ export default function ReclamacoesSecretaria() {
             </nav>
           ))
         ) : (
-          <p>Nenhuma Reclamação em Analise.</p>
+          <p>Nenhuma Dúvida em Analise.</p>
         )}
       </Organizador>
-      <h2>Reclamações resolvidas {agendasAceitas.length}</h2>
+      <h2>Reclamações resolvidas {reclamacoesAceitas.length}</h2>
       <Organizador>
-        {agendasAceitas.length > 0 ? (
-          agendasAceitas.map((demanda) => (
+        {reclamacoesAceitas.length > 0 ? (
+          reclamacoesAceitas.map((demanda) => (
             <nav key={demanda.id}>
               <p>
                 Dia que foi solicitada:{" "}
@@ -130,7 +130,7 @@ export default function ReclamacoesSecretaria() {
             </nav>
           ))
         ) : (
-          <p>Nenhuma Reclamação pendente.</p>
+          <p>Nenhuma Dúvida Resolvida.</p>
         )}
       </Organizador>
     </Div>

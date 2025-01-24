@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 
 export const Organizador = styled.section`
   display: grid;
@@ -10,26 +10,23 @@ export const Organizador = styled.section`
 
   nav {
     display: flex;
+    /* justify-content: center; */
+    /* text-align: center; */
+    background-color: #011526;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    width: 290px;
-    padding: 20px 1px;
+    padding: 25px;
+    width: 300px;
     margin: 0 auto;
-    text-align: center;
-    position: relative;
-    cursor: pointer;
+    background: rgb(236, 236, 236);
     box-shadow:
-      0 10px 15px -3px rgba(33, 150, 243, 0.4),
-      0 4px 6px -4px rgba(33, 150, 243, 0.4);
-    border-radius: 10px;
-    background-color: #6b6ecc;
-    background: linear-gradient(45deg, #04051dea 0%, #2b566e 100%);
+      rgba(0, 0, 0, 0.4) 0px 2px 4px,
+      rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+      rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 
     p {
       margin-top: 20px;
       font-weight: bolder;
-      color: white;
+      color: black;
       text-align: center;
     }
 
@@ -43,10 +40,6 @@ export const Div = styled.div`
   align-items: center;
   text-align: center;
   margin: 0 auto;
-
-  .criarDemanda {
-    margin-top: 30px;
-  }
 
   div {
     margin-top: 20px;

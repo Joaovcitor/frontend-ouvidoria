@@ -71,9 +71,6 @@ export const Form = styled.form`
     border-radius: 10px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
-    background-color: transparent;
-    color: black;
-    border: 1px black solid;
 
     option {
       /* background-color: black; */

@@ -15,6 +15,9 @@ import Perfil from "../pages/Users/Perfil";
 import ReclamacoesUsuarioComum from "../pages/Reclamacoes/ReclamacaoUsuarioComum";
 import ReclamacoesSecretaria from "../pages/Reclamacoes/ReclamacaoSecretaria";
 import EditarReclamacao from "../pages/Reclamacoes/EditarReclamacao";
+import About from "../pages/about";
+import CriarDuvida from "../pages/Duvidas/CriarDuvida";
+import DuvidasUsuarioComum from "../pages/Duvidas/DuvidaUsuarioComum";
 
 export default function Routes() {
   return (
@@ -78,6 +81,16 @@ export default function Routes() {
         path="/perfil/resetar-senha/:token"
         isClosed={false}
         component={ResetarSenha}
+      />
+
+      <Route exact path="/sobre" isClosed={false} component={About} />
+
+      <Route exact path="/cadastrar-duvida" isClosed component={CriarDuvida} />
+      <Route
+        exact
+        path="/minhas-duvidas"
+        isClosed
+        component={DuvidasUsuarioComum}
       />
 
       <Route path="*" component={Page404} />

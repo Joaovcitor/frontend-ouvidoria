@@ -16,6 +16,7 @@ module.exports = {
     "prettier/prettier": ["off"],
     "import/prettier-default-export": 0,
     "no-unused-vars": "off",
+    "no-undef": "off",
   },
   settings: {
     react: {

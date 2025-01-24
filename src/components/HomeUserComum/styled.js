@@ -3,13 +3,11 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export const Organizador = styled.section`
   display: flex;
+  flex-wrap: wrap; /* Permite que os elementos "quebrem" para a próxima linha */
   justify-content: center;
-  flex-direction: column;
-  div {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-  }
+  gap: 20px; /* Espaçamento entre os itens */
+  text-align: center;
+  padding: 20px;
 `;
 
 export const Div = styled.div`
@@ -23,12 +21,13 @@ export const Div = styled.div`
   nav {
     @media (max-width: 470px) {
       margin: 0 auto;
+      margin-top: 20px;
     }
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 180px; /* largura fixada */
+    width: 300px; /* largura fixada */
     box-sizing: border-box;
     height: 220px;
     background: url("./images/Brasao_quixada.png") center center no-repeat;
@@ -37,7 +36,7 @@ export const Div = styled.div`
       inset 0 -3em 3em rgba(0, 0, 0, 0.1),
       0 0 0 2px rgb(190, 190, 190),
       0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
+    border-radius: 5%;
     padding: 10px;
     margin: 10px; /* Remover margens fixas excessivas */
 
@@ -59,12 +58,12 @@ export const Links = styled(Link)`
   display: inline-block;
   margin: 0 auto;
   padding: 10px 20px;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
   color: #fff;
-  width: 85px;
+  width: 155px;
   background-color: #4aa2d9;
   border: 2px solid #000;
   border-radius: 10px;

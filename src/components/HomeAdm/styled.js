@@ -88,8 +88,8 @@ export const Section = styled.section`
   }
 
   .dados-eleitores {
-    width: 115px;
-    height: 100px;
+    width: 175px;
+    height: 150px;
     background: rgb(17, 4, 134);
     border-radius: 25%;
     /* box-shadow:
