@@ -63,7 +63,11 @@ export default function ReclamacoesUsuarioComum() {
               {demanda.Fotos &&
               demanda.Fotos.length > 0 &&
               demanda.Fotos[0].url ? (
-                <img src={demanda.Fotos[0].url} alt="Foto da reclamação" />
+                <img
+                  crossOrigin="anonymous"
+                  src={demanda.Fotos[0].url}
+                  alt="Foto da reclamação"
+                />
               ) : (
                 <FaUserCircle size={36} />
               )}
