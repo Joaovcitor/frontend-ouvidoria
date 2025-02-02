@@ -1,11 +1,12 @@
 import React from "react";
 
 import { Container } from "../../styles/GlobalStyle";
+import { Div } from "./styled";
 
 export default function Page404() {
   return (
     <Container>
-      <h1>Essa página não existe ou ainda será criada! </h1>
+      <h1>Página não encontrada</h1>
     </Container>
   );
 }

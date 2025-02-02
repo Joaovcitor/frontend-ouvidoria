@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Div, Section, Organizador, Links, DemandasDe7Dias } from "./styled";
 import { MdDiversity3, MdOutlineReceiptLong } from "react-icons/md";
-import { Reclamacao } from "../../types/api";
+import { Reclamacao, Duvidas } from "../../types/api";
 import buscarReclamacoesDaSecretaria from "../../utils/buscarReclamacoesResolvidas";
+import buscarDuvidasDaSecretaria from "../../utils/BuscarDuvidasSecretaria";
 
 export default function HomeAdm() {
   const [reclamacoes, setReclamacoes] = useState<Reclamacao[]>([]);
+  const [duvidas, setDuvidas] = useState<Duvidas[]>([]);
 
   buscarReclamacoesDaSecretaria(setReclamacoes);
+  buscarDuvidasDaSecretaria(setDuvidas);
 
   const reclamacoesResolvidas: Reclamacao[] = reclamacoes.filter(
     (reclamacao) => reclamacao.status === "resolvida"
@@ -26,58 +29,57 @@ export default function HomeAdm() {
   const dataInicio = seteDiasAtras.toISOString();
 
   const ultimasReclamacoesDos7Dias: Reclamacao[] = reclamacoes.filter(
-    (reclamacao) => reclamacao.createdAt <= dataInicio
+    (reclamacao) => reclamacao.createdAt >= dataInicio
+  );
+
+  const ultimasDuvidasDos7Dias: Duvidas[] = duvidas.filter(
+    (duvidas) => duvidas.createdAt >= dataInicio
   );
 
   return (
     <Organizador>
-      <Section>
-        <nav className="dados-eleitores">
-          <MdDiversity3 size={40}></MdDiversity3>
-          <p>Reclamações da sua secretaria: {reclamacoes.length}</p>
-        </nav>
-      </Section>
-
-      <DemandasDe7Dias>
-        <nav>
-          <h1>Últimas reclamações dos 7 dias para sua secretaria</h1>
-          {ultimasReclamacoesDos7Dias.map((reclamacao) => (
-            <>
-              <div key={reclamacao.id}>
-                <h3>Descricao: {reclamacao.descricao}</h3>
-                <p>
-                  Secretaria Responsável: {reclamacao.secretariaResponsavel}
-                </p>
-              </div>
-            </>
-          ))}
-        </nav>
-        <nav>
-          <h1>Últimas reclamações dos 7 dias para sua secretaria</h1>
-          {ultimasReclamacoesDos7Dias.map((reclamacao) => (
-            <>
-              <div key={reclamacao.id}>
-                <h3>Descricao: {reclamacao.descricao}</h3>
-                <p>
-                  Secretaria Responsável: {reclamacao.secretariaResponsavel}
-                </p>
-              </div>
-            </>
-          ))}
-        </nav>
-      </DemandasDe7Dias>
       <Div>
         <nav>
           <MdOutlineReceiptLong size={40}></MdOutlineReceiptLong>
           <h4>Reclamações</h4>
           <Links to="/reclamacoes-secretarias">Acessar</Links>
         </nav>
+        <nav>
+          <MdOutlineReceiptLong size={40}></MdOutlineReceiptLong>
+          <h4>Dúvidas</h4>
+          <Links to="/duvidas-secretaria">Acessar</Links>
+        </nav>
       </Div>
-      <Div>
-        <section>
-          <h3>Demandas Resolvidas: {reclamacoesResolvidas.length}</h3>
-        </section>
-      </Div>
+      <Section>
+        <nav className="dados-eleitores">
+          <MdDiversity3 size={40}></MdDiversity3>
+          <p>Reclamações da sua secretaria: {reclamacoes.length}</p>
+        </nav>
+      </Section>
+      <DemandasDe7Dias>
+        <nav>
+          <h1>Últimas reclamações dos 7 dias para sua secretaria</h1>
+          {ultimasReclamacoesDos7Dias.map((reclamacao) => (
+            <div key={reclamacao.id}>
+              <h3>Descricao: {reclamacao.descricao}</h3>
+              <Links to={`/reclamacoes/editar/${reclamacao.id}`}>
+                Ver Reclamação
+              </Links>
+            </div>
+          ))}
+        </nav>
+        <nav>
+          <h1>Últimas dúvidas enviadas dos 7 dias para sua secretaria</h1>
+          {ultimasDuvidasDos7Dias.map((reclamacao) => (
+            <div key={reclamacao.id}>
+              <h3>Descricao: {reclamacao.descricao}</h3>
+              <Links to={`/duvidas/editar/${reclamacao.id}`}>
+                Ver Reclamação
+              </Links>
+            </div>
+          ))}
+        </nav>
+      </DemandasDe7Dias>
     </Organizador>
   );
 }

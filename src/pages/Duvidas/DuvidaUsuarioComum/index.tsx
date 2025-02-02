@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Organizador, Div } from "./styled";
+import { useEffect, useState } from "react";
+import { Div } from "./styled";
 import axios from "../../../services/axios";
-import { format } from "date-fns";
 import { toast } from "react-toastify";
+import DuvidasComponent from "../../../components/Duvidas";
 
 import { Duvidas } from "../../../types/api";
 
@@ -26,11 +26,11 @@ export default function DuvidasUsuarioComum() {
     getData();
   }, []);
 
-  const reclamacoesPendentes = agendas.filter(
+  const duvidasPendentes = agendas.filter(
     (agenda) => agenda.status === "pendente"
   );
 
-  const reclamacoesEmAnalise = agendas.filter(
+  const duvidasEmAnalise = agendas.filter(
     (agenda) => agenda.status === "em analise"
   );
 
@@ -39,63 +39,24 @@ export default function DuvidasUsuarioComum() {
   );
 
   return (
-    <div>
-      <h2>Reclamações pendentes {reclamacoesPendentes.length}</h2>
-      <Organizador>
-        {reclamacoesPendentes.length > 0 ? (
-          reclamacoesPendentes.map((demanda) => (
-            <nav key={demanda.id}>
-              <p>
-                Dia que foi solicitada:{" "}
-                {format(new Date(demanda.createdAt), "dd/MM/yyyy")}
-              </p>
-              <h4>Descrição:</h4>
-              <p>{demanda.descricao}</p>
-              <p>Status: {demanda.status}</p>
-            </nav>
-          ))
-        ) : (
-          <p>Nenhuma Reclamação pendente.</p>
-        )}
-      </Organizador>
+    <Div>
+      <h2>Dúvidas pendentes {duvidasPendentes.length}</h2>
+      <DuvidasComponent
+        duvidas={duvidasPendentes}
+        msg={"Nenhuma dúvida pendente"}
+      />
 
-      <h2>Reclamações Em análise {reclamacoesEmAnalise.length}</h2>
-      <Organizador>
-        {reclamacoesEmAnalise.length > 0 ? (
-          reclamacoesEmAnalise.map((reclamacao) => (
-            <nav key={reclamacao.id}>
-              <p>
-                Dia que foi solicitada:{" "}
-                {format(new Date(reclamacao.createdAt), "dd/MM/yyyy")}
-              </p>
-              <p>Descrição:</p>
-              <p>{reclamacao.descricao}</p>
-              <p>Status: {reclamacao.status}</p>
-            </nav>
-          ))
-        ) : (
-          <p>Nenhuma Reclamação pendente.</p>
-        )}
-      </Organizador>
+      <h2>Dúvidas Em análise {duvidasEmAnalise.length}</h2>
+      <DuvidasComponent
+        duvidas={duvidasEmAnalise}
+        msg="Nenhuma dúvida em análise"
+      />
 
-      <h2>Agendas aceitas {agendasAceitas.length}</h2>
-      <Organizador>
-        {agendasAceitas.length > 0 ? (
-          agendasAceitas.map((demanda) => (
-            <nav key={demanda.id}>
-              <p>
-                Dia que foi solicitada:{" "}
-                {format(new Date(demanda.createdAt), "dd/MM/yyyy")}
-              </p>
-              <p>Descrição:</p>
-              <p>{demanda.descricao}</p>
-              <p>Status: {demanda.status}</p>
-            </nav>
-          ))
-        ) : (
-          <p>Nenhuma Reclamação pendente.</p>
-        )}
-      </Organizador>
-    </div>
+      <h2>Dúvidas Resolvidas {agendasAceitas.length}</h2>
+      <DuvidasComponent
+        duvidas={agendasAceitas}
+        msg="Nenhuma dúvida resolvida"
+      />
+    </Div>
   );
 }

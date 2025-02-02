@@ -18,6 +18,7 @@ import EditarReclamacao from "../pages/Reclamacoes/EditarReclamacao";
 import About from "../pages/about";
 import CriarDuvida from "../pages/Duvidas/CriarDuvida";
 import DuvidasUsuarioComum from "../pages/Duvidas/DuvidaUsuarioComum";
+import DuvidasSecretaria from "../pages/Duvidas/DuvidaSecretaria";
 
 export default function Routes() {
   return (
@@ -91,6 +92,13 @@ export default function Routes() {
         path="/minhas-duvidas"
         isClosed
         component={DuvidasUsuarioComum}
+      />
+
+      <Route
+        exact
+        path="/duvidas-secretaria"
+        isClosed
+        component={DuvidasSecretaria}
       />
 
       <Route path="*" component={Page404} />

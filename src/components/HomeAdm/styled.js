@@ -65,7 +65,7 @@ export const Links = styled(Link)`
   text-align: center;
   text-decoration: none;
   color: #fff;
-  width: 85px;
+  width: 145px;
   background-color: #4aa2d9;
   border: 2px solid #000;
   border-radius: 10px;

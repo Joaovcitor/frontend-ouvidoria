@@ -12,7 +12,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Login(props) {
   const dispatch = useDispatch();
-  const prevPath = get(props, "location.state.prevPath", "/perfil");
+  const prevPath = get(props, "location.state.prevPath", "/");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 

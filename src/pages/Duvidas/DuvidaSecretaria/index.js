@@ -5,15 +5,14 @@ import { format } from "date-fns";
 import { FcSupport } from "react-icons/fc";
 
 export default function DuvidasSecretaria() {
-  const [reclamacoes, setReclamacoes] = useState([]);
+  const [duvidas, setDuvidas] = useState([]);
   const [reclamacaoSemSecretaria, setReclamacoesSemSecretaria] = useState([]);
 
   useEffect(() => {
     async function getData() {
       try {
         const response = await axios.get("/duvidas/duvidas-secretaria");
-        console.log(response.data);
-        setReclamacoes(response.data.reclamacoes);
+        setDuvidas(response.data.duvidas);
       } catch (e) {
         console.log(e);
       }
@@ -36,20 +35,20 @@ export default function DuvidasSecretaria() {
     getData();
   }, []);
 
-  const reclamacoesPendentes = reclamacoes.filter(
+  const duvidasPendentes = duvidas.filter(
     (agenda) => agenda.status === "pendente"
   );
 
-  const reclamacoesEmAnalise = reclamacoes.filter(
+  const duvidasEmAnalise = duvidas.filter(
     (agenda) => agenda.status === "em analise"
   );
 
-  const reclamacoesAceitas = reclamacoes.filter(
+  const duvidasResolvidas = duvidas.filter(
     (agenda) => agenda.status === "resolvida"
   );
   return (
     <Div>
-      <h2>Reclamações sem secretaria {reclamacaoSemSecretaria.length}</h2>
+      <h2>Dúvidas sem secretaria {reclamacaoSemSecretaria.length}</h2>
       <Organizador>
         {reclamacaoSemSecretaria.length > 0 ? (
           reclamacaoSemSecretaria.map((reclamacao) => (
@@ -70,10 +69,10 @@ export default function DuvidasSecretaria() {
           <p>Nenhuma Dúvida pendente.</p>
         )}
       </Organizador>
-      <h2>Reclamações pendentes {reclamacoesPendentes.length}</h2>
+      <h2>Dúvidas pendentes {duvidasPendentes.length}</h2>
       <Organizador>
-        {reclamacoesPendentes.length > 0 ? (
-          reclamacoesPendentes.map((demanda) => (
+        {duvidasPendentes.length > 0 ? (
+          duvidasPendentes.map((demanda) => (
             <nav key={demanda.id}>
               <p>
                 Dia que foi solicitada:{" "}
@@ -91,10 +90,10 @@ export default function DuvidasSecretaria() {
           <p>Nenhuma Dúvida pendente.</p>
         )}
       </Organizador>
-      <h2>Reclamações Em analise {reclamacoesEmAnalise.length}</h2>
+      <h2>Dúvidas Em analise {duvidasEmAnalise.length}</h2>
       <Organizador>
-        {reclamacoesEmAnalise.length > 0 ? (
-          reclamacoesEmAnalise.map((reclamacao) => (
+        {duvidasEmAnalise.length > 0 ? (
+          duvidasEmAnalise.map((reclamacao) => (
             <nav key={reclamacao.id}>
               <p>
                 Dia que foi solicitada:{" "}
@@ -112,10 +111,10 @@ export default function DuvidasSecretaria() {
           <p>Nenhuma Dúvida em Analise.</p>
         )}
       </Organizador>
-      <h2>Reclamações resolvidas {reclamacoesAceitas.length}</h2>
+      <h2>Dúvidas resolvidas {duvidasResolvidas.length}</h2>
       <Organizador>
-        {reclamacoesAceitas.length > 0 ? (
-          reclamacoesAceitas.map((demanda) => (
+        {duvidasResolvidas.length > 0 ? (
+          duvidasResolvidas.map((demanda) => (
             <nav key={demanda.id}>
               <p>
                 Dia que foi solicitada:{" "}

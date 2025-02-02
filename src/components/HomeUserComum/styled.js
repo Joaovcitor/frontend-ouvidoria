@@ -30,7 +30,7 @@ export const Div = styled.div`
     width: 300px; /* largura fixada */
     box-sizing: border-box;
     height: 220px;
-    background: url("./images/Brasao_quixada.png") center center no-repeat;
+    /* background: url("./images/Brasao_quixada.png") center center no-repeat; */
     transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow:
       inset 0 -3em 3em rgba(0, 0, 0, 0.1),
@@ -55,22 +55,28 @@ export const Div = styled.div`
 `;
 
 export const Links = styled(Link)`
-  display: inline-block;
-  margin: 0 auto;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  color: #fff;
-  width: 155px;
-  background-color: #4aa2d9;
-  border: 2px solid #000;
-  border-radius: 10px;
-  box-shadow: 5px 5px 0px #000;
-  transition: all 0.3s ease;
+  background: #fbca1f;
+  font-family: inherit;
+  padding: 0.6em 1.3em;
+  font-weight: 900;
+  font-size: 18px;
+  border: 3px solid black;
+  border-radius: 0.4em;
+  box-shadow: 0.1em 0.1em;
   cursor: pointer;
+  color: black;
   margin-bottom: 10px;
+  width: 160px;
+
+  &:hover {
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+  }
+
+  &:active {
+    transform: translate(0.05em, 0.05em);
+    box-shadow: 0.05em 0.05em;
+  }
 `;
 
 export const Section = styled.section`

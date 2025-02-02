@@ -48,14 +48,7 @@ export default function Home() {
 
   return (
     <Organizador>
-      {user ? (
-        <>
-          <h1>Olá {user.name}</h1>
-          {renderizarHomeConformeRole()}
-        </>
-      ) : (
-        <p>Carregando...</p>
-      )}
+      {user ? <>{renderizarHomeConformeRole()}</> : <p>Carregando...</p>}
     </Organizador>
   );
 }

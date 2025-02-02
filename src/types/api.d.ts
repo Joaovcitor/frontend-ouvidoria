@@ -4,6 +4,15 @@ export interface Reclamacao {
   status: "pendente" | "em analise" | "resolvida";
   createdAt: string;
   secretariaResponsavel: string;
+  resposta: string | null;
+  Fotos: Fotos[]; // Alterado de Fotos para um array de Fotos
+}
+
+export interface Fotos {
+  id: number;
+  originalname: string;
+  filename: string;
+  url: string;
 }
 
 export interface Duvidas {
@@ -12,6 +21,7 @@ export interface Duvidas {
   status: "pendente" | "em analise" | "resolvida";
   createdAt: string;
   secretariaResponsavel: string;
+  resposta: string;
 }
 
 export interface User {

@@ -4,10 +4,12 @@ import axios from "../../../services/axios";
 import { format } from "date-fns";
 import { toast } from "react-toastify";
 
-import { Reclamacao } from "../../../types/api";
+import { Reclamacao, Fotos } from "../../../types/api";
+import { get } from "lodash";
+import { FaUserCircle } from "react-icons/fa";
 
 export default function ReclamacoesUsuarioComum() {
-  const [agendas, setReclamacoes] = useState<Reclamacao[]>([]);
+  const [reclamacoes, setReclamacoes] = useState<Reclamacao[]>([]);
 
   useEffect(() => {
     async function getData() {
@@ -26,15 +28,17 @@ export default function ReclamacoesUsuarioComum() {
     getData();
   }, []);
 
-  const reclamacoesPendentes = agendas.filter(
+  console.log(reclamacoes.map((demanda) => console.log(demanda)));
+
+  const reclamacoesPendentes = reclamacoes.filter(
     (agenda) => agenda.status === "pendente"
   );
 
-  const reclamacoesEmAnalise = agendas.filter(
+  const reclamacoesEmAnalise = reclamacoes.filter(
     (agenda) => agenda.status === "em analise"
   );
 
-  const agendasAceitas = agendas.filter(
+  const reclamacoesAceitas = reclamacoes.filter(
     (agenda) => agenda.status === "resolvida"
   );
 
@@ -49,9 +53,24 @@ export default function ReclamacoesUsuarioComum() {
                 Dia que foi solicitada:{" "}
                 {format(new Date(demanda.createdAt), "dd/MM/yyyy")}
               </p>
-              <h4>Descrição:</h4>
+              <p>Descrição:</p>
               <p>{demanda.descricao}</p>
+              <p>Resposta:</p>
+              <p>
+                {demanda.resposta ? demanda.resposta : "Aguardando resposta"}
+              </p>
               <p>Status: {demanda.status}</p>
+              {demanda.Fotos &&
+              demanda.Fotos.length > 0 &&
+              demanda.Fotos[0].url ? (
+                <img
+                  crossOrigin="anonymous"
+                  src={"http://localhost:3004/uploads/1738507127379_16607.png"}
+                  alt="Foto da reclamação"
+                />
+              ) : (
+                <FaUserCircle size={36} />
+              )}
             </nav>
           ))
         ) : (
@@ -74,14 +93,14 @@ export default function ReclamacoesUsuarioComum() {
             </nav>
           ))
         ) : (
-          <p>Nenhuma Reclamação pendente.</p>
+          <p>Nenhuma Reclamação em análise.</p>
         )}
       </Organizador>
 
-      <h2>Agendas aceitas {agendasAceitas.length}</h2>
+      <h2>Agendas aceitas {reclamacoesAceitas.length}</h2>
       <Organizador>
-        {agendasAceitas.length > 0 ? (
-          agendasAceitas.map((demanda) => (
+        {reclamacoesAceitas.length > 0 ? (
+          reclamacoesAceitas.map((demanda) => (
             <nav key={demanda.id}>
               <p>
                 Dia que foi solicitada:{" "}
@@ -93,7 +112,7 @@ export default function ReclamacoesUsuarioComum() {
             </nav>
           ))
         ) : (
-          <p>Nenhuma Reclamação pendente.</p>
+          <p>Nenhuma Reclamação resolvida.</p>
         )}
       </Organizador>
     </div>

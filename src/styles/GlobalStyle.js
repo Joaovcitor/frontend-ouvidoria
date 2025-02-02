@@ -13,6 +13,8 @@ export default createGlobalStyle`
   body {
     font-family: sans-serif;
     background: "#F2F2F2";
+    /* background: url("./images/Brasao_quixada.png") center center no-repeat; */
+
   }
 
   html, body, #root {
